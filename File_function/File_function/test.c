@@ -170,6 +170,121 @@
 
 //4.fgets函数
 //char *fgets( char *string, int n, FILE *stream );
+//#include <stdio.h>
+//#include <string.h>
+//#include <errno.h>
+//int main()
+//{
+//	//打开文件
+//	FILE* pf = fopen("data.txt", "r");
+//	if (pf == NULL)
+//	{
+//		printf("%s\n", strerror(errno));
+//		return 1;//文件打开失败，失败返回
+//	}
+//	//对文件进行输入字符串操作
+//	char arr[10] = { 0 };
+//	fgets(arr, 6, pf);
+//	printf("%s\n", arr);
+//	//关闭文件
+//	fclose(pf);
+//	pf = NULL;
+//	return 0;
+//}
+
+
+//5.fprintf函数
+//int fprintf( FILE *stream, const char *format [, argument ]...);
+
+//int printf( const char *format [, argument]... );
+//#include <stdio.h>
+//#include <string.h>
+//#include <errno.h>
+//struct S
+//{
+//	char name[20];
+//	char sex[5];
+//	int age;
+//};
+//int main()
+//{
+//	//打开文件
+//	FILE* pf = fopen("data.txt", "w");
+//	if (pf == NULL)
+//	{
+//		printf("%s\n", strerror(errno));
+//		return 1;//文件打开失败，失败返回
+//	}
+//	//对文件进行格式化输出操作
+//	struct S s = { "zhangsan", "nan", 20 };
+//	fprintf(pf, "%s %s %d\n", s.name, s.sex, s.age);
+//	//关闭文件
+//	fclose(pf);
+//	pf = NULL;
+//	return 0;
+//}
+
+
+//6.fscanf函数
+//int fscanf( FILE *stream, const char *format [, argument ]... );
+
+//int scanf( const char *format [,argument]... );
+//#include <stdio.h>
+//#include <string.h>
+//#include <errno.h>
+//struct S
+//{
+//	char name[20];
+//	char sex[5];
+//	int age;
+//};
+//int main()
+//{
+//	//打开文件
+//	FILE* pf = fopen("data.txt", "r");
+//	if (pf == NULL)
+//	{
+//		printf("%s\n", strerror(errno));
+//		return 1;//文件打开失败，失败返回
+//	}
+//	//对文件进行格式化输入操作
+//	struct S tmp = { 0 };
+//	fscanf(pf, "%s %s %d", tmp.name, tmp.sex, &(tmp.age));
+//	printf("%s %s %d\n", tmp.name, tmp.sex, tmp.age);
+//	//将tmp中的内容打印出来，看是否读取成功
+//	//关闭文件
+//	fclose(pf);
+//	pf = NULL;
+//	return 0;
+//}
+
+
+//7.fwrite函数
+//size_t fwrite( const void *buffer, size_t size, size_t count, FILE *stream );
+//#include <stdio.h>
+//#include <string.h>
+//#include <errno.h>
+//int main()
+//{
+//	//打开文件
+//	FILE* pf = fopen("data.txt", "w");
+//	if (pf == NULL)
+//	{
+//		printf("%s\n", strerror(errno));
+//		return 1;//文件打开失败，失败返回
+//	}
+//	//对文件以二进制形式进行输出操作
+//	int arr[10] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+//	fwrite(arr, sizeof(int), 10, pf);
+//	//关闭文件
+//	fclose(pf);
+//	pf = NULL;
+//	return 0;
+//}
+
+
+//8.fread函数
+//size_t fread( void *buffer, size_t size, size_t count, FILE *stream );
 #include <stdio.h>
 #include <string.h>
 #include <errno.h>
@@ -182,10 +297,14 @@ int main()
 		printf("%s\n", strerror(errno));
 		return 1;//文件打开失败，失败返回
 	}
-	//对文件进行输入字符串操作
-	char arr[10] = { 0 };
-	fgets(arr, 6, pf);
-	printf("%s\n", arr);
+	//对文件以二进制形式进行输入操作
+	int arr[10] = { 0 };
+	fread(arr,sizeof(int),10,pf);
+	int i = 0;
+	for (i = 0; i < 10; i++)
+	{
+		printf("%d ", arr[i]);
+	}//将arr中的内容打印出来，看是否读取成功
 	//关闭文件
 	fclose(pf);
 	pf = NULL;
