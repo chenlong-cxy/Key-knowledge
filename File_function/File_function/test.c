@@ -407,28 +407,64 @@
 
 //rewind函数
 //void rewind( FILE *stream );
-#include <stdio.h>
-#include <string.h>
-#include <errno.h>
-int main()
-{
-	//打开文件
-	FILE* pf = fopen("data.txt", "r");
-	if (pf == NULL)
-	{
-		printf("%s\n", strerror(errno));
-		return 1;//文件打开失败，失败返回
-	}
-	//用字符输入函数读取文件信息
-	int ch = fgetc(pf);
-	printf("%c\n", ch);//观察第一次读取到的字符
-	ch = fgetc(pf);
-	printf("%c\n", ch);//观察第二次读取到的字符
-	rewind(pf);//调整文件指针位置
-	ch = fgetc(pf);//读取到字符'a'
-	printf("%c\n", ch);
-	//关闭文件
-	fclose(pf);
-	pf = NULL;
-	return 0;
-}
+//#include <stdio.h>
+//#include <string.h>
+//#include <errno.h>
+//int main()
+//{
+//	//打开文件
+//	FILE* pf = fopen("data.txt", "r");
+//	if (pf == NULL)
+//	{
+//		printf("%s\n", strerror(errno));
+//		return 1;//文件打开失败，失败返回
+//	}
+//	//用字符输入函数读取文件信息
+//	int ch = fgetc(pf);
+//	printf("%c\n", ch);//观察第一次读取到的字符
+//	ch = fgetc(pf);
+//	printf("%c\n", ch);//观察第二次读取到的字符
+//	rewind(pf);//调整文件指针位置
+//	ch = fgetc(pf);//读取到字符'a'
+//	printf("%c\n", ch);
+//	//关闭文件
+//	fclose(pf);
+//	pf = NULL;
+//	return 0;
+//}
+
+
+//文件的结束判定
+//int ferror( FILE *stream );
+//int feof( FILE *stream );
+//#include <stdio.h>
+//#include <string.h>
+//#include <errno.h>
+//int main()
+//{
+//	//打开文件
+//	FILE* pf = fopen("data.txt", "r");
+//	if (pf == NULL)
+//	{
+//		printf("%s\n", strerror(errno));
+//		return 1;//文件打开失败，失败返回
+//	}
+//	//读取文件中的数据
+//	int ch = 0;
+//	while ((ch = fgetc(pf)) != EOF)
+//	{
+//		printf("%c", ch);
+//	}
+//	if (ferror(pf))
+//	{
+//		printf("文件指针使用时，发生错误而结束\n");
+//	}
+//	else if (feof(pf))
+//	{
+//		printf("文件指针使用时，读取到文件末尾而结束\n");
+//	}
+//	//关闭文件
+//	fclose(pf);
+//	pf = NULL;
+//	return 0;
+//}
