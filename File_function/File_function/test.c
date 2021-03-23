@@ -337,8 +337,76 @@
 //}
 
 
-//1.fseek函数
+//fseek函数
 //int fseek( FILE *stream, long offset, int origin );
+//#include <stdio.h>
+//#include <string.h>
+//#include <errno.h>
+//int main()
+//{
+//	//打开文件
+//	FILE* pf = fopen("data.txt", "r");
+//	if (pf == NULL)
+//	{
+//		printf("%s\n", strerror(errno));
+//		return 1;//文件打开失败，失败返回
+//	}
+//	//用字符输入函数读取文件信息
+//	int ch = fgetc(pf);
+//	printf("%c\n", ch);//观察第一次读取到的字符
+//	ch = fgetc(pf);
+//	printf("%c\n", ch);//观察第二次读取到的字符
+//	//操作文件指针
+//	//fseek(pf, 0, SEEK_SET);//调整文件指针位置
+//	//ch = fgetc(pf);//读取到字符'a'
+//	//printf("%c\n", ch);
+//
+//	//fseek(pf, -6, SEEK_END);//调整文件指针位置
+//	//ch = fgetc(pf);//读取到字符'a'
+//	//printf("%c\n", ch);
+//
+//	fseek(pf, -2, SEEK_CUR);//调整文件指针位置
+//	ch = fgetc(pf);//读取到字符'a'
+//	printf("%c\n", ch);
+//	//关闭文件
+//	fclose(pf);
+//	pf = NULL;
+//	return 0;
+//}
+
+
+//ftell函数
+//long ftell( FILE *stream );
+//#include <stdio.h>
+//#include <string.h>
+//#include <errno.h>
+//int main()
+//{
+//	//打开文件
+//	FILE* pf = fopen("data.txt", "r");
+//	if (pf == NULL)
+//	{
+//		printf("%s\n", strerror(errno));
+//		return 1;//文件打开失败，失败返回
+//	}
+//	//用字符输入函数读取文件信息
+//	int ch = fgetc(pf);
+//	printf("%c\n", ch);//观察第一次读取到的字符
+//	ch = fgetc(pf);
+//	printf("%c\n", ch);//观察第二次读取到的字符
+//	long Offset = ftell(pf);
+//	fseek(pf, -Offset, SEEK_CUR);//调整文件指针位置
+//	ch = fgetc(pf);//读取到字符'a'
+//	printf("%c\n", ch);
+//	//关闭文件
+//	fclose(pf);
+//	pf = NULL;
+//	return 0;
+//}
+
+
+//rewind函数
+//void rewind( FILE *stream );
 #include <stdio.h>
 #include <string.h>
 #include <errno.h>
@@ -356,16 +424,7 @@ int main()
 	printf("%c\n", ch);//观察第一次读取到的字符
 	ch = fgetc(pf);
 	printf("%c\n", ch);//观察第二次读取到的字符
-	//操作文件指针
-	//fseek(pf, 0, SEEK_SET);//调整文件指针位置
-	//ch = fgetc(pf);//读取到字符'a'
-	//printf("%c\n", ch);
-
-	//fseek(pf, -6, SEEK_END);//调整文件指针位置
-	//ch = fgetc(pf);//读取到字符'a'
-	//printf("%c\n", ch);
-
-	fseek(pf, -2, SEEK_CUR);//调整文件指针位置
+	rewind(pf);//调整文件指针位置
 	ch = fgetc(pf);//读取到字符'a'
 	printf("%c\n", ch);
 	//关闭文件
