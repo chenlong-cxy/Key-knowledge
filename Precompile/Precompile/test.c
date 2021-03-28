@@ -111,14 +111,91 @@
 //}
 
 
+//#include <stdio.h>
+//int main()
+//{
+//	int age = 10;
+//	printf("The value of ""age"" is ""%d""\n", age);
+//	double pi = 3.14;
+//	printf("The value of ""pi"" is ""%f""\n", pi);
+//	int* p = &age;
+//	printf("The value of ""p"" is ""%p""\n", p);
+//	return 0;
+//}
+
+
+//#include <stdio.h>
+//#define CAT(x,y) x##y
+//int main()
+//{
+//	int workhard = 100;
+//	printf("%d\n", CAT(work, hard));
+//	return 0;
+//}
+
+
+//带有副作用的宏参数
+//#include <stdio.h>
+//#define MAX(x,y) ((x)>(y)?(x):(y))
+//int main()
+//{
+//	int a = 10;
+//	int b = 20;
+//	//int c = MAX(a, b);
+//	int c = MAX(a++, b++);
+//	printf("%d\n", c);
+//	return 0;
+//}
+
+
+//#include <stdio.h>
+//int main()
+//{
+//	int a = 10;
+//	int b = 20;
+//	int c = ((a++)>(b++)?(a++):(b++));
+//	printf("%d\n", c);
+//	printf("%d %d\n", a, b);
+//	return 0;
+//}
+
+
+//#include <stdio.h>
+//#define MAX(x,y) ((x)>(y)?(x):(y))
+//int Max(int x, int y)
+//{
+//	return x > y ? x : y;
+//}
+//int main()
+//{
+//	int a = 10;
+//	int b = 20;
+//	int c = MAX(a, b);//7
+//	int d = Max(a, b);//30
+//	return 0;
+//}
+
+
 #include <stdio.h>
+#include <stdlib.h>
+#define MALLOC(num,type) (type*)malloc(num*sizeof(type))
 int main()
 {
-	int age = 10;
-	printf("The value of ""age"" is ""%d""\n", age);
-	double pi = 3.14;
-	printf("The value of ""pi"" is ""%f""\n", pi);
-	int* p = &age;
-	printf("The value of ""p"" is ""%p""\n", p);
+	int* p1 = (int*)malloc(10 * sizeof(int));
+	if (p1 == NULL)
+	{
+		printf("p1开辟失败\n");
+		return 1;
+	}
+	int* p2 = MALLOC(10, int);
+	if (p2 == NULL)
+	{
+		printf("p2开辟失败\n");
+		return 1;
+	}
+	free(p1);
+	p1 = NULL;
+	free(p2);
+	p2 = NULL;
 	return 0;
 }
