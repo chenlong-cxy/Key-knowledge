@@ -176,26 +176,178 @@
 //}
 
 
-#include <stdio.h>
-#include <stdlib.h>
-#define MALLOC(num,type) (type*)malloc(num*sizeof(type))
-int main()
-{
-	int* p1 = (int*)malloc(10 * sizeof(int));
-	if (p1 == NULL)
-	{
-		printf("p1开辟失败\n");
-		return 1;
-	}
-	int* p2 = MALLOC(10, int);
-	if (p2 == NULL)
-	{
-		printf("p2开辟失败\n");
-		return 1;
-	}
-	free(p1);
-	p1 = NULL;
-	free(p2);
-	p2 = NULL;
-	return 0;
-}
+//#include <stdio.h>
+//#include <stdlib.h>
+//#define MALLOC(num,type) (type*)malloc(num*sizeof(type))
+//int main()
+//{
+//	int* p1 = (int*)malloc(10 * sizeof(int));
+//	if (p1 == NULL)
+//	{
+//		printf("p1开辟失败\n");
+//		return 1;
+//	}
+//	int* p2 = MALLOC(10, int);
+//	if (p2 == NULL)
+//	{
+//		printf("p2开辟失败\n");
+//		return 1;
+//	}
+//	free(p1);
+//	p1 = NULL;
+//	free(p2);
+//	p2 = NULL;
+//	return 0;
+//}
+
+
+//#include <stddef.h>
+//#include <stdio.h>
+//offsetof();
+//getchar();
+//#define  getchar()   getc(stdin)
+//#define  putchar(c)  putc((c),  stdout) 
+//#define offsetof(s,m)   (size_t)&(((s *)0)->m)
+
+
+//#include <stdio.h>
+//#define MAX 100
+//int main()
+//{
+//	printf("%d\n", MAX);//正常使用
+//#undef MAX
+//	printf("%d\n", MAX);//报错，MAX未定义
+//}
+
+
+//#include <stdio.h>
+//int main()
+//{
+//	int array[ARRAY_SIZE];
+//	int i = 0;
+//	for (i = 0; i< ARRAY_SIZE; i++)
+//	{
+//		array[i] = i;
+//	}
+//	for (i = 0; i< ARRAY_SIZE; i++)
+//	{
+//		printf("%d ", array[i]);
+//	}
+//	printf("\n");
+//	return 0;
+//}
+
+//gcc -D programe.c ARRAY_SIZE = 10
+
+
+//#include <stdio.h>
+//#define __TEST__ 0
+//int main()
+//{
+//	int i = 0;
+//	for (i = 0; i < 10; i++)
+//	{
+//		printf("%d\n", i);
+//#ifdef __TEST__
+//		printf("hello world!\n");
+//#endif
+//	}
+//	return 0;
+//}
+
+
+//#include <stdio.h>
+//int main()
+//{
+//	int i = 0;
+//	for (i = 0; i < 10; i++)
+//	{
+//		printf("%d\n", i);
+//#if 0
+//		printf("hello world!\n");
+//#endif
+//	}
+//	return 0;
+//}
+
+
+//#include <stdio.h>
+//int main()
+//{
+//	int a = 2;
+//#if a+3
+//	printf("a\n");
+//	printf("a\n");
+//	printf("a\n");
+//#elif 4-3
+//	printf("b\n");
+//#elif 2-2
+//	printf("c\n");
+//#else 3+4
+//	printf("d\n");
+//#endif
+//	return 0;
+//}
+
+
+//#include <stdio.h>
+//int main()
+//{
+//	//定义了PRINT才打印参与编译
+//#ifdef PRINT
+//	printf("参与编译\n");
+//#endif
+//	return 0;
+//}
+
+
+//#include <stdio.h>
+//int main()
+//{
+//	//没有定义PRINT才打印参与编译
+//#ifndef PRINT
+//	printf("参与编译\n");
+//#endif
+//	return 0;
+//}
+
+
+//#include <stdio.h>
+//int main()
+//{
+//	//定义了PRINT才打印参与编译
+//#if defined(PRINT)
+//	printf("参与编译\n");
+//#endif
+//	return 0;
+//}
+
+
+//#include <stdio.h>
+//int main()
+//{
+//	//没有定义PRINT才打印参与编译
+//#if !defined(PRINT)
+//	printf("参与编译\n");
+//#endif
+//	return 0;
+//}
+
+
+//#include <stdio.h>
+//int main()
+//{
+//#if !defined(PRINT)
+//#ifdef PRINT
+//	printf("hello\n");
+//#else
+//	printf("world\n");
+//#endif
+//#endif
+//	return 0;
+//}
+
+
+#if 表达式
+	//...
+#endif
