@@ -335,10 +335,11 @@
 
 
 //#include <stdio.h>
+//#define MIN 10
 //int main()
 //{
-//#if !defined(PRINT)
-//#ifdef PRINT
+//#if !defined(MAX)
+//#ifdef MIN
 //	printf("hello\n");
 //#else
 //	printf("world\n");
@@ -348,6 +349,34 @@
 //}
 
 
-#if 表达式
-	//...
-#endif
+//#if 表达式
+//	//...
+//#endif
+
+
+//#if 表达式
+//	//...
+//#elif 表达式
+//	//...
+//#elif 表达式
+//	//...
+//#else 表达式
+//	//...
+//#endif
+
+////第一种
+//#if defined(表达式)
+//	//...
+//#endif
+////第一种的反面
+//#if !defined(表达式)
+//	//...
+//#endif
+////第二种
+//#ifdef 表达式
+//	//...
+//#endif
+////第二种的反面
+//#ifndef 表达式
+//	//...
+//#endif
