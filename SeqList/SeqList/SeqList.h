@@ -4,13 +4,13 @@
 #include <stdlib.h>
 #include <assert.h>
 
-typedef int SLDataType;
+typedef int SLDataType;//本篇博客以存放整型数据为例
 
 typedef struct SeqList
 {
-	SLDataType* a;
-	int size;
-	int capacity;
+	SLDataType* a;//声明了一个指向顺序表的指针，姑且称它为“顺序表指针”
+	int size;//记录当前顺序表内元素个数
+	int capacity;//记录当前顺序表的最大容量
 }SeqList;
 
 //初始化顺序表
