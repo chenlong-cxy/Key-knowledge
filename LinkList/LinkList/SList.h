@@ -4,12 +4,12 @@
 #include <stdlib.h>
 #include <assert.h>
 
-typedef int SLTDataType;
+typedef int SLTDataType;//篇博客以存放整型数据为例
 
 typedef struct SListNode
 {
-	SLTDataType data;
-	struct SListNode* next;
+	SLTDataType data;//数据域：用于存储该结点的数据
+	struct SListNode* next;//指针域：用于存放下一个结点的地址
 }SListNode;
 
 //打印链表
@@ -32,8 +32,8 @@ void SListPopBack(SListNode** pplist);
 void SListErasetAfter(SListNode* pos);
 //删除给定位置的值
 void SListErasetCur(SListNode** pplist, SListNode* pos);
-//删除给定位置之前的值
-void SListErasetBefore(SListNode** pplist, SListNode* pos);
 
 //查找数据
 SListNode* SListFind(SListNode* plist, SLTDataType x);
+//修改数据
+void SListModify(SListNode* pos, SLTDataType x);
