@@ -48,6 +48,18 @@ void SListPushBack(SListNode** pplist, SLTDataType x)
 	}
 }
 
+//在给定位置之后插入
+void SListInsertAfter(SListNode* pos, SLTDataType x)
+{
+
+}
+
+//在给定位置之前插入
+void SListInsertBefore(SListNode** pplist, SListNode* pos, SLTDataType x)
+{
+
+}
+
 //头删
 void SListPopFront(SListNode** pplist)
 {
@@ -89,4 +101,35 @@ void SListPopBack(SListNode** pplist)
 		tail = NULL;
 		prev->next = NULL;
 	}
+}
+
+//删除给定位置之后的值
+void SListErasetAfter(SListNode* pos)
+{
+
+}
+
+//删除给定位置的值
+void SListErasetCur(SListNode** pplist, SListNode* pos)
+{
+
+}
+
+//删除给定位置之前的值
+void SListErasetBefore(SListNode** pplist, SListNode* pos)
+{
+
+}
+
+//查找数据
+SListNode* SListFind(SListNode* plist, SLTDataType x)
+{
+	SListNode* cur = plist;
+	while (cur != NULL)
+	{
+		if (cur->data == x)
+			return cur;
+		cur = cur->next;
+	}
+	return NULL;
 }
