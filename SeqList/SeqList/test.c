@@ -50,10 +50,48 @@ void SeqListTest2()
 	SeqListModify(&s, 2, 9);
 	SeqListPrint(&s);
 }
+
+void SeqListTest3()
+{
+	SeqList s;
+	SeqListInit(&s);
+	SeqListPushBack(&s, 1);
+	SeqListPushBack(&s, 2);
+	SeqListPushBack(&s, 3);
+	SeqListPushBack(&s, 4);
+	SeqListPrint(&s);
+}
+void SeqListTest4()
+{
+	SeqList s;
+	SeqListInit(&s);
+	SeqListPushBack(&s, 1);
+	SeqListPushBack(&s, 2);
+	SeqListPushBack(&s, 3);
+	SeqListPushBack(&s, 4);
+	SeqListPrint(&s);
+	printf("第3个元素删除后");
+	SeqListErase(&s, 2);
+	SeqListPrint(&s);
+}
+void SeqListTest5()
+{
+	SeqList s;
+	SeqListInit(&s);
+	SeqListPushBack(&s, 1);
+	SeqListPushBack(&s, 2);
+	SeqListPushBack(&s, 3);
+	SeqListPushBack(&s, 4);
+	SeqListPrint(&s);
+	int pos = SeqListFind(&s, 2);
+	printf("值为2的元素的位置为%d\n", pos + 1);
+}
 int main()
 {
 	//SeqListTest1();//插入测试
-	SeqListTest2();//删除测试
-
+	//SeqListTest2();//删除测试
+	SeqListTest3();
+	SeqListTest4();
+	SeqListTest5();
 	return 0;
 }

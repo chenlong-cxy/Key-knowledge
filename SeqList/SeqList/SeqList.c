@@ -25,6 +25,7 @@ void SeqListPrint(SeqList* ps)
 	assert(ps);
 	int i = 0;
 	//循环打印顺序表指针指向的数据
+	printf("顺序表内容为:>");
 	for (i = 0; i < ps->size; i++)
 	{
 		printf("%d ", ps->a[i]);
