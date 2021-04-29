@@ -28,6 +28,9 @@ void Test()
 
 	ListErase(pos);
 	ListPrint(plist);
+	printf("%d\n", ListSize(plist));
+
+	ListDestroy(plist);
 }
 int main()
 {

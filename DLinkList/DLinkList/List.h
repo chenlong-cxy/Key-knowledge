@@ -5,13 +5,13 @@
 #include <assert.h>
 #include <stdbool.h>
 
-typedef int LTDataType;
+typedef int LTDataType;//存储的数据类型
 
 typedef struct ListNode
 {
-	LTDataType data;
-	struct ListNode* prev;
-	struct ListNode* next;
+	LTDataType data;//数据域
+	struct ListNode* prev;//前驱指针
+	struct ListNode* next;//后驱指针
 }ListNode;
 
 //初始化链表
@@ -40,5 +40,5 @@ void ListErase(ListNode* pos);
 
 //链表判空
 bool ListEmpty(ListNode* phead);
-//获取链表中元素个数
+//获取链表中的元素个数
 int ListSize(ListNode* phead);
