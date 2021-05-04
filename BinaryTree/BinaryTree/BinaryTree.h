@@ -5,13 +5,13 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-typedef char BTDataType;
+typedef char BTDataType;//结点中存储的元素类型（以char为例）
 
 typedef struct BTNode
 {
-	BTDataType data;
-	struct BTNode* left;
-	struct BTNode* right;
+	BTDataType data;//结点中存储的元素类型
+	struct BTNode* left;//左指针域（指向左孩子）
+	struct BTNode* right;//右指针域（指向右孩子）
 }BTNode;
 
 //深度优先
@@ -43,6 +43,22 @@ void BinaryTreeDestroy(BTNode* root);
 //void BinaryTreeDestroy(BTNode*& root);//取别名
 
 //判断二叉树是否是完全二叉树
-bool IsCompleteTree(BTNode* root);
+bool isCompleteTree(BTNode* root);
 //判断二叉树是否是单值二叉树
-bool IsUnivalTree(BTNode* root);
+bool isUnivalTree(BTNode* root);
+//判断两棵二叉树是否相同
+bool isSameTree(BTNode* p, BTNode* q);
+
+//前序遍历
+int* preorderTraversal(BTNode* root, int* returnSize);
+//中序遍历
+int* inorderTraversal(BTNode* root, int* returnSize);
+//后序遍历
+int* postorderTraversal(BTNode* root, int* returnSize);
+
+//翻转二叉树
+BTNode* invertTree(BTNode* root);
+//对称二叉树
+bool isSymmetric(BTNode* root);
+//另一个树的子树
+bool isSubtree(BTNode* root, BTNode* subRoot);

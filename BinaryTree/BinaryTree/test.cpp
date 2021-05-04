@@ -23,13 +23,41 @@ int main()
 	BTNode* D = BuyNode('D');
 	BTNode* E = BuyNode('E');
 	BTNode* F = BuyNode('F');
-	//BTNode* G = BuyNode('G');
+	/*BTNode* G = BuyNode('G');*/
 	A->left = B;
 	A->right = C;
 	B->left = D;
-	//B->right = G;
+	/*B->right = G;*/
 	C->left = E;
 	C->right = F;
+	//相同二叉树
+	BTNode* W = BuyNode('A');
+	BTNode* S = BuyNode('B');
+	BTNode* N = BuyNode('C');
+	BTNode* H = BuyNode('D');
+	BTNode* J = BuyNode('E');
+	BTNode* X = BuyNode('F');
+	W->left = S;
+	W->right = N;
+	S->left = H;
+	//B->right = G;
+	N->left = J;
+	N->right = X;
+	//对称二叉树
+	BTNode* T = BuyNode('A');
+	BTNode* O = BuyNode('C');
+	BTNode* P = BuyNode('C');
+	BTNode* Q = BuyNode('D');
+	BTNode* R = BuyNode('B');
+	BTNode* U = BuyNode('B');
+	BTNode* V = BuyNode('D');
+
+	T->left = O;
+	T->right = P;
+	O->left = Q;
+	O->right = R;
+	P->left = U;
+	P->right = V;
 
 	printf("前序遍历:");
 	BinaryPrevOrder(A);
@@ -58,9 +86,22 @@ int main()
 	BinaryLevelOrder(A);
 	printf("\n");
 
-	printf("是否是完全二叉树:%d\n", IsCompleteTree(A));
+	printf("是否是完全二叉树:%d\n", isCompleteTree(A));
 
-	printf("是否是单值二叉树:%d\n", IsUnivalTree(A));
+	printf("是否是单值二叉树:%d\n", isUnivalTree(A));
+
+	printf("两棵树是否相等:%d\n", isSameTree(A, W));
+
+	printf("原二叉树:");
+	BinaryLevelOrder(A);
+	printf("\n");
+
+	printf("翻转二叉树:");
+	BTNode* ret = invertTree(A);
+	BinaryLevelOrder(ret);
+	printf("\n");
+
+	printf("是否是对称二叉树:%d\n", isSymmetric(T));
 
 	BinaryTreeDestroy(A);
 	A = NULL;
