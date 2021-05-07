@@ -4,6 +4,7 @@
 #include <assert.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <math.h>
 
 typedef char BTDataType;//结点中存储的元素类型（以char为例）
 
@@ -48,6 +49,8 @@ bool isCompleteTree(BTNode* root);
 bool isUnivalTree(BTNode* root);
 //判断两棵二叉树是否相同
 bool isSameTree(BTNode* p, BTNode* q);
+//判断二叉树是否是平衡二叉树
+bool isBalanced(BTNode* root);
 
 //前序遍历
 int* preorderTraversal(BTNode* root, int* returnSize);

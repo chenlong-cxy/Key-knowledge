@@ -50,14 +50,19 @@ int main()
 	BTNode* Q = BuyNode('D');
 	BTNode* R = BuyNode('B');
 	BTNode* U = BuyNode('B');
-	BTNode* V = BuyNode('D');
+	BTNode* V = BuyNode('b');
 
+	//T->left = O;
+	//T->right = P;
+	//O->left = Q;
+	//O->right = R;
+	//P->left = U;
+	//P->right = V;
+	//判断平衡二叉树
 	T->left = O;
-	T->right = P;
-	O->left = Q;
-	O->right = R;
-	P->left = U;
-	P->right = V;
+	O->left = P;
+	P->left = Q;
+	Q->left = R;
 
 	printf("前序遍历:");
 	BinaryPrevOrder(A);
@@ -103,7 +108,56 @@ int main()
 
 	printf("是否是对称二叉树:%d\n", isSymmetric(T));
 
+	printf("是否是平衡二叉树:%d\n", isBalanced(T));
 	BinaryTreeDestroy(A);
 	A = NULL;
 	return 0;
 }
+
+//#include <stdio.h>
+//#include <stdlib.h>
+//
+//typedef struct TreeNode
+//{
+//	struct TreeNode* left;
+//	struct TreeNode* right;
+//	char data;
+//}TreeNode;
+//
+//TreeNode* CreateTree(char* str, int* pi)
+//{
+//	if (str[*pi] == '#')//
+//	{
+//		(*pi)++;
+//		return NULL;
+//	}
+//	//不是NULL，构建结点
+//	TreeNode* root = (TreeNode*)malloc(sizeof(TreeNode));
+//	root->left = NULL;
+//	root->right = NULL;
+//	root->data = str[*pi];
+//	(*pi)++;
+//	//递归构建左子树
+//	root->left = CreateTree(str, pi);
+//	//递归构建右子树
+//	root->right = CreateTree(str, pi);
+//	return root;
+//}
+////中序遍历
+//void Inorder(TreeNode* root)
+//{
+//	if (root == NULL)
+//		return;
+//	Inorder(root->left);
+//	printf("%c ", root->data);
+//	Inorder(root->right);
+//}
+//int main()
+//{
+//	char str[100];
+//	scanf("%s", str);
+//	int i = 0;
+//	TreeNode* root = CreateTree(str, &i);
+//	Inorder(root);
+//	return 0;
+//}

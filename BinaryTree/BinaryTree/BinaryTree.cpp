@@ -349,3 +349,92 @@ bool isSubtree(BTNode* root, BTNode* subRoot)
 	//判断root的左子树或右子树中是否有某一棵子树与subRoot相同
 	return isSubtree(root->left, subRoot) || isSubtree(root->right,subRoot);
 }
+
+//判断二叉树是否是平衡二叉树
+bool isBalanced(BTNode* root)
+{
+	if (root == NULL)//空树是平衡二叉树
+		return true;
+
+	int leftDepth = BinaryTreeMaxDepth(root->left);//求左子树的深度
+	int rightDepth = BinaryTreeMaxDepth(root->right);//求右子树的深度
+	//左右子树高度差的绝对值不超过1 && 其左子树是平衡二叉树 && 其右子树是平衡二叉树
+	return abs(leftDepth - rightDepth) < 2 && isBalanced(root->left) && isBalanced(root->right);
+}
+
+
+bool _isBalanced(BTNode* root, int* ph)
+{
+	if (root == NULL)//空树是平衡二叉树
+	{
+		*ph = 0;//空树返回高度为0
+		return true;
+	}
+	//先判断左子树
+	int leftHight = 0;
+	if (_isBalanced(root->left, &leftHight) == false)
+		return false;
+	//再判断右子树
+	int rightHight = 0;
+	if (_isBalanced(root->right, &rightHight) == false)
+		return false;
+	//把左右子树的高度中的较大值+1作为当前树的高度返回给上一层
+	*ph = Max(leftHight, rightHight) + 1;
+
+	return abs(leftHight - rightHight) < 2;//平衡二叉树的条件
+}
+//判断二叉树是否是平衡二叉树
+bool isBalanced(BTNode* root)
+{
+	int hight = 0;
+	return _isBalanced(root, &hight);
+}
+
+
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct TreeNode
+{
+    struct TreeNode* left;
+    struct TreeNode* right;
+    char data;
+}TreeNode;
+
+TreeNode* CreateTree(char* str, int* pi)
+{
+    if(str[*pi] == '#')//
+    {
+        (*pi)++;
+        return NULL;
+    }
+    //不是NULL，构建结点
+    TreeNode* root = (TreeNode*)malloc(sizeof(TreeNode));
+    root->left = NULL;
+    root->right = NULL;
+    root->data = str[*pi];
+    (*pi)++;
+    //递归构建左子树
+    root->left = CreateTree(str, pi);
+    //递归构建右子树
+    root->right = CreateTree(str, pi);
+    return root;
+}
+//中序遍历
+void Inorder(TreeNode* root)
+{
+    if(root == NULL)
+        return;
+    Inorder(root->left);
+    printf("%c ", root->data);
+    Inorder(root->right);
+}
+int main()
+{
+    char str[100];
+    scanf("%s", str);
+    int i = 0;
+    TreeNode* root = CreateTree(str, &i);
+    Inorder(root);
+    return 0;
+}
