@@ -42,6 +42,7 @@ void ShellSort(int* a, int n)
 	while (gap > 1)
 	{
 		gap = gap / 2;
+		//gap = gap / 3 + 1;
 		int i = 0;
 		for (i = 0; i < n - gap; i++)
 		{
@@ -95,14 +96,66 @@ void SelectSort1(int* a, int n)
 //选择排序(一次选两个数)
 void SelectSort2(int* a, int n)
 {
-	int left;
-	int right;
-	int min = left;
-	int max = left;
-	int i = 0;
-	for (i = left; i < right; i++)
+	int left = 0;
+	int right = n - 1;
+	while (left < right)
 	{
-		if (a[i] < a[min])
-			min = a[i];
+		int minIndex = left;
+		int maxIndex = left;
+		int i = 0;
+		for (i = left; i <= right; i++)
+		{
+			if (a[i] < a[minIndex])
+				minIndex = i;
+			if (a[i]>a[maxIndex])
+				maxIndex = i;
+		}
+		Swap(&a[minIndex], &a[left]);
+		if (left == maxIndex)
+		{
+			maxIndex = minIndex;
+		}
+		Swap(&a[maxIndex], &a[right]);
+		left++;
+		right--;
+	}
+}
+
+//堆排序
+void AdjustDown(int* a, int n, int root)
+{
+	int child = 2 * root + 1;//假设左孩子较大
+	while (child < n)
+	{
+		if (child + 1 < n&&a[child + 1] > a[child])//右孩子存在，并且比左孩子大
+		{
+			child++;//左右孩子的较大值
+		}
+		if (a[child] > a[root])
+		{
+			Swap(&a[child], &a[root]);
+			root = child;
+			child = 2 * root + 1;//左孩子
+		}
+		else
+		{
+			break;
+		}
+	}
+}
+void HeapSort(int* a, int n)
+{
+	//排升序，建大堆
+	int i = 0;
+	for (i = (n - 1 - 1) / 2; i >= 0; i--)
+	{
+		AdjustDown(a, n, i);
+	}
+	int end = n - 1;
+	while (end)
+	{
+		Swap(&a[0], &a[end]);
+		AdjustDown(a, end, 0);
+		end--;
 	}
 }

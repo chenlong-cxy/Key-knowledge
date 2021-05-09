@@ -14,3 +14,7 @@ void SelectSort1(int* a, int n);
 
 //选择排序(一次选两个数)
 void SelectSort2(int* a, int n);
+
+//堆排序
+void AdjustDown(int* a, int n, int root);
+void HeapSort(int* a, int n);
