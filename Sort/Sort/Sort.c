@@ -207,18 +207,124 @@ void BubbleSort(int* a, int n)
 
 //快速排序（递归实现）
 //1.hoare
-
-//2.挖坑法
-
-//3.前后指针法
-
-void QuickSort(int* a, int begin, int end)
+void QuickSort1(int* a, int begin, int end)
 {
-	if (end - begin < 2)
+	if (begin >= end)
 		return;
 
 	int left = begin;
 	int right = end;
+	int keyi = left;
+	while (left < right)
+	{
+		//right先走，找小
+		while (left < right&&a[right] >= a[keyi])
+		{
+			right--;
+		}
+		//left后走，找大
+		while (left < right&&a[left] <= a[keyi])
+		{
+			left++;
+		}
+		if (left < right)
+		{
+			Swap(&a[left], &a[right]);
+		}
+	}
+	int meeti = left;
+	Swap(&a[keyi], &a[meeti]);
+
+	QuickSort1(a, begin, meeti - 1);
+	QuickSort1(a, meeti + 1, end);
+}
+//2.挖坑法
+void QuickSort2(int* a, int begin, int end)
+{
+	if (begin >= end)
+		return;
+
+	int left = begin;
+	int right = end;
+	int key = a[left];
+	while (left < right)
+	{
+		//right向左，找小
+		while (left < right&&a[right] >= key)
+		{
+			right--;
+		}
+		//填坑
+		a[left] = a[right];
+		//left向右，找大
+		while (left < right&&a[left] <= key)
+		{
+			left++;
+		}
+		//填坑
+		a[right] = a[left];
+	}
+	int meeti = left;
+	a[meeti] = key;
+
+	QuickSort2(a, begin, meeti - 1);
+	QuickSort2(a, meeti + 1, end);
+}
+//3.前后指针法
+void QuickSort3(int* a, int begin, int end)
+{
+	if (begin >= end)
+		return;
+
+	int prev = begin;
+	int cur = begin + 1;
+	int keyi = begin;
+	while (cur <= end)
+	{
+		if (a[cur] < a[keyi] && ++prev != cur)
+		{
+			Swap(&a[prev], &a[cur]);
+		}
+		cur++;
+	}
+	int meeti = prev;
+	Swap(&a[keyi], &a[meeti]);
+
+	QuickSort3(a, begin, meeti - 1);
+	QuickSort3(a, meeti + 1, end);
+}
+
+
+
+//快速排序（递归实现）
+int GetMidIndex(int* a, int left, int right)
+{
+	int mid = left + (right - left) / 2;
+	if (a[mid] > a[left])
+	{
+		if (a[mid] < a[right])
+			return mid;
+		else if (a[left]>a[right])
+			return left;
+		else
+			return right;
+	}
+	else
+	{
+		if (a[mid] > a[right])
+			return mid;
+		else if (a[left] > a[right])
+			return right;
+		else
+			return left;
+	}
+}
+//1.hoare
+int PartSort1(int* a, int left, int right)
+{
+	int midIndex = GetMidIndex(a, left, right);
+	Swap(&a[left], &a[midIndex]);
+
 	int keyi = left;
 	while (left < right)
 	{
@@ -232,10 +338,72 @@ void QuickSort(int* a, int begin, int end)
 		{
 			left++;
 		}
-		Swap(&a[left], &a[right]);
+		if (left < right)
+		{
+			Swap(&a[left], &a[right]);
+		}
 	}
 	int meeti = left;
 	Swap(&a[keyi], &a[meeti]);
-	QuickSort(a, begin, meeti - 1);
-	QuickSort(a, meeti + 1, end);
+	return meeti;
+}
+//2.挖坑法
+int PartSort2(int* a, int left, int right)
+{
+	int midIndex = GetMidIndex(a, left, right);
+	Swap(&a[left], &a[midIndex]);
+
+	int key = a[left];
+	while (left < right)
+	{
+		//right向左，找小
+		while (left < right&&a[right] >= key)
+		{
+			right--;
+		}
+		//填坑
+		a[left] = a[right];
+		//left向右，找大
+		while (left < right&&a[left] <= key)
+		{
+			left++;
+		}
+		//填坑
+		a[right] = a[left];
+	}
+	int meeti = left;
+	a[meeti] = key;
+	return meeti;
+}
+//3.前后指针法
+int PartSort3(int* a, int left, int right)
+{
+	int midIndex = GetMidIndex(a, left, right);
+	Swap(&a[left], &a[midIndex]);
+
+	int prev = left;
+	int cur = left + 1;
+	int keyi = left;
+	while (cur <= right)
+	{
+		if (a[cur] < a[keyi] && ++prev != cur)
+		{
+			Swap(&a[prev], &a[cur]);
+		}
+		cur++;
+	}
+	int meeti = prev;
+	Swap(&a[keyi], &a[meeti]);
+	return meeti;
+}
+//主体
+void QuickSort(int* a, int begin, int end)
+{
+	if (begin >= end)
+		return;
+	//int keyi = PartSort1(a, begin, end);
+	//int keyi = PartSort2(a, begin, end);
+	int keyi = PartSort3(a, begin, end);
+	QuickSort(a, begin, keyi - 1);
+	QuickSort(a, keyi + 1, end);
 }
