@@ -127,18 +127,19 @@ void SelectSort2(int* a, int n)
 //堆排序
 void AdjustDown(int* a, int n, int root)
 {
-	int child = 2 * root + 1;//假设左孩子较大
+	int parent = root;
+	int child = 2 * parent + 1;//假设左孩子较大
 	while (child < n)
 	{
 		if (child + 1 < n&&a[child + 1] > a[child])//右孩子存在，并且比左孩子大
 		{
 			child++;//左右孩子的较大值
 		}
-		if (a[child] > a[root])
+		if (a[child] > a[parent])
 		{
-			Swap(&a[child], &a[root]);
-			root = child;
-			child = 2 * root + 1;//左孩子
+			Swap(&a[child], &a[parent]);
+			parent = child;
+			child = 2 * parent + 1;//左孩子
 		}
 		else
 		{
@@ -161,4 +162,80 @@ void HeapSort(int* a, int n)
 		AdjustDown(a, end, 0);
 		end--;
 	}
+}
+
+//冒泡排序
+//void BubbleSort(int* a, int n)
+//{
+//	int i = 0;
+//	for (i = 0; i < n; i++)
+//	{
+//		int exchange = 0;
+//		int j = 0;
+//		for (j = 0; j < n - i - 1; j++)
+//		{
+//			if (a[j]>a[j + 1])
+//			{
+//				Swap(&a[j], &a[j + 1]);
+//				exchange = 1;
+//			}
+//		}
+//		if (exchange == 0)
+//			break;
+//	}
+//}
+
+void BubbleSort(int* a, int n)
+{
+	int end = 0;
+	for (end = n - 1; end >= 0; end--)
+	{
+		int exchange = 0;
+		int i = 0;
+		for (i = 0; i < end; i++)
+		{
+			if (a[i]>a[i + 1])
+			{
+				Swap(&a[i], &a[i + 1]);
+				exchange = 1;
+			}
+		}
+		if (exchange == 0)
+			break;
+	}
+}
+
+//快速排序（递归实现）
+//1.hoare
+
+//2.挖坑法
+
+//3.前后指针法
+
+void QuickSort(int* a, int begin, int end)
+{
+	if (end - begin < 2)
+		return;
+
+	int left = begin;
+	int right = end;
+	int keyi = left;
+	while (left < right)
+	{
+		//right走，找小
+		while (left < right&&a[right] >= a[keyi])
+		{
+			right--;
+		}
+		//left先走，找大
+		while (left < right&&a[left] <= a[keyi])
+		{
+			left++;
+		}
+		Swap(&a[left], &a[right]);
+	}
+	int meeti = left;
+	Swap(&a[keyi], &a[meeti]);
+	QuickSort(a, begin, meeti - 1);
+	QuickSort(a, meeti + 1, end);
 }

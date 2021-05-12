@@ -18,3 +18,15 @@ void SelectSort2(int* a, int n);
 //堆排序
 void AdjustDown(int* a, int n, int root);
 void HeapSort(int* a, int n);
+
+//冒泡排序
+void BubbleSort(int* a, int n);
+
+//快速排序（递归实现）
+//1.hoare
+
+//2.挖坑法
+
+//3.前后指针法
+
+void QuickSort(int* a, int begin, int end);
