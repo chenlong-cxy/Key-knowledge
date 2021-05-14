@@ -102,6 +102,17 @@ void TestQuickSort()
 	PrintArr(a, sz);
 	printf("\n");
 }
+void TestMergeSort()
+{
+	//int a[] = { 23, 43, 56, 98, 12, 34, 54, 87, 23, 83 };
+	int a[] = { 6, 1, 2, 5, 9, 3, 4, 7, 10, 8 };
+	//int a[] = { 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0, -1, -2, -3, -4, -5, -6, -7, -8, -9, -10 };
+	int sz = sizeof(a) / sizeof(a[0]);
+	MergeSort(a, sz);
+	printf("MergeSort:");
+	PrintArr(a, sz);
+	printf("\n");
+}
 int main()
 {
 	TestInertSort();
@@ -114,6 +125,7 @@ int main()
 	TestQuickSort2();
 	TestQuickSort3();
 	TestQuickSort();
-	printf("三数取中未测试！");
+	printf("三数取中未测试！\n");
+	TestMergeSort();
 	return 0;
 }

@@ -407,3 +407,43 @@ void QuickSort(int* a, int begin, int end)
 	QuickSort(a, begin, keyi - 1);
 	QuickSort(a, keyi + 1, end);
 }
+
+//归并排序
+void _MergeSort(int* a, int left, int right, int* tmp)
+{
+	if (left >= right)//归并结束条件
+	{
+		return;
+	}
+	int mid = left + (right - left) / 2;
+	_MergeSort(a, left, mid, tmp);
+	_MergeSort(a, mid + 1, right, tmp);
+	int begin1 = left, end1 = mid;
+	int begin2 = mid + 1, end2 = right;
+	int i = left;
+	while (begin1 <= end1&&begin2 <= end2)
+	{
+		if (a[begin1] < a[begin2])
+			tmp[i++] = a[begin1++];
+		else
+			tmp[i++] = a[begin2++];
+	}
+	while (begin1 <= end1)
+		tmp[i++] = a[begin1++];
+	while (begin2 <= end2)
+		tmp[i++] = a[begin2++];
+	int j = 0;
+	for (j = left; j <= right; j++)
+		a[j] = tmp[j];
+}
+void MergeSort(int* a, int n)
+{
+	int* tmp = (int*)malloc(sizeof(int)*n);
+	if (tmp == NULL)
+	{
+		printf("malloc fail\n");
+		exit(-1);
+	}
+	_MergeSort(a, 0, n - 1, tmp);
+	free(tmp);
+}

@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 //打印数组
 void PrintArr(int* a, int n);
@@ -33,3 +34,6 @@ int PartSort2(int* a, int left, int right);
 int PartSort3(int* a, int left, int right);
 //主体
 void QuickSort(int* a, int begin, int end);
+
+//归并排序
+void MergeSort(int* a, int n);
