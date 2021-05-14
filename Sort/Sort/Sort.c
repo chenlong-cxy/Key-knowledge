@@ -44,9 +44,10 @@ void ShellSort(int* a, int n)
 	int gap = n;
 	while (gap > 1)
 	{
-		gap = gap / 2;
+		gap = gap / 2;//gap折半
 		//gap = gap / 3 + 1;
 		int i = 0;
+		//进行一趟排序
 		for (i = 0; i < n - gap; i++)
 		{
 			int end = i;
@@ -65,8 +66,8 @@ void ShellSort(int* a, int n)
 			}
 			a[end + gap] = tmp;
 		}
-		printf("gap:%d->", gap);
-		PrintArr(a, n);
+		//printf("gap:%d->", gap);
+		//PrintArr(a, n);
 	}
 }
 
@@ -82,30 +83,31 @@ void Swap(int* p1, int* p2)
 void SelectSort1(int* a, int n)
 {
 	int i = 0;
-	for (i = 0; i < n; i++)
+	for (i = 0; i < n; i++)//i代表参与该趟选择排序的第一个元素的下标
 	{
 		int start = i;
-		int min = start;
+		int min = start;//记录最小元素的下标
 		while (start < n)
 		{
 			if (a[start] < a[min])
-				min = start;
+				min = start;//最小值的下标更新
 			start++;
 		}
-		Swap(&a[i], &a[min]);
+		Swap(&a[i], &a[min]);//最小值与参与该趟选择排序的第一个元素交换位置
 	}
 }
 
 //选择排序(一次选两个数)
 void SelectSort2(int* a, int n)
 {
-	int left = 0;
-	int right = n - 1;
+	int left = 0;//记录参与该趟选择排序的第一个元素的下标
+	int right = n - 1;//记录参与该趟选择排序的最后一个元素的下标
 	while (left < right)
 	{
-		int minIndex = left;
-		int maxIndex = left;
+		int minIndex = left;//记录最小元素的下标
+		int maxIndex = left;//记录最大元素的下标
 		int i = 0;
+		//找出最大值及最小值的下标
 		for (i = left; i <= right; i++)
 		{
 			if (a[i] < a[minIndex])
@@ -113,10 +115,11 @@ void SelectSort2(int* a, int n)
 			if (a[i]>a[maxIndex])
 				maxIndex = i;
 		}
+		//将最大值和最小值放在序列开头和末尾
 		Swap(&a[minIndex], &a[left]);
 		if (left == maxIndex)
 		{
-			maxIndex = minIndex;
+			maxIndex = minIndex;//防止最大值位于序列开头，被最小值交换
 		}
 		Swap(&a[maxIndex], &a[right]);
 		left++;
@@ -125,6 +128,7 @@ void SelectSort2(int* a, int n)
 }
 
 //堆排序
+//堆的向下调整算法
 void AdjustDown(int* a, int n, int root)
 {
 	int parent = root;
@@ -139,14 +143,15 @@ void AdjustDown(int* a, int n, int root)
 		{
 			Swap(&a[child], &a[parent]);
 			parent = child;
-			child = 2 * parent + 1;//左孩子
+			child = 2 * parent + 1;
 		}
-		else
+		else//已成堆
 		{
 			break;
 		}
 	}
 }
+//堆排序
 void HeapSort(int* a, int n)
 {
 	//排升序，建大堆
@@ -190,7 +195,7 @@ void BubbleSort(int* a, int n)
 	int end = 0;
 	for (end = n - 1; end >= 0; end--)
 	{
-		int exchange = 0;
+		int exchange = 0;//记录该趟冒泡排序是否进行过交换
 		int i = 0;
 		for (i = 0; i < end; i++)
 		{
@@ -200,17 +205,43 @@ void BubbleSort(int* a, int n)
 				exchange = 1;
 			}
 		}
-		if (exchange == 0)
+		if (exchange == 0)//该趟冒泡排序没有进行过交换，已有序
 			break;
 	}
 }
 
 //快速排序（递归实现）
+//三数取中
+int GetMidIndex(int* a, int left, int right)
+{
+	int mid = left + (right - left) / 2;
+	if (a[mid] > a[left])
+	{
+		if (a[mid] < a[right])
+			return mid;
+		else if (a[left]>a[right])
+			return left;
+		else
+			return right;
+	}
+	else
+	{
+		if (a[mid] > a[right])
+			return mid;
+		else if (a[left] > a[right])
+			return right;
+		else
+			return left;
+	}
+}
 //1.hoare
 void QuickSort1(int* a, int begin, int end)
 {
 	if (begin >= end)
 		return;
+	//三数取中
+	int midIndex = GetMidIndex(a, begin, end);
+	Swap(&a[begin], &a[midIndex]);
 
 	int left = begin;
 	int right = end;
@@ -244,6 +275,10 @@ void QuickSort2(int* a, int begin, int end)
 	if (begin >= end)
 		return;
 
+	//三数取中
+	int midIndex = GetMidIndex(a, begin, end);
+	Swap(&a[begin], &a[midIndex]);
+
 	int left = begin;
 	int right = end;
 	int key = a[left];
@@ -276,6 +311,10 @@ void QuickSort3(int* a, int begin, int end)
 	if (begin >= end)
 		return;
 
+	//三数取中
+	int midIndex = GetMidIndex(a, begin, end);
+	Swap(&a[begin], &a[midIndex]);
+
 	int prev = begin;
 	int cur = begin + 1;
 	int keyi = begin;
@@ -297,28 +336,6 @@ void QuickSort3(int* a, int begin, int end)
 
 
 //快速排序（递归实现）
-int GetMidIndex(int* a, int left, int right)
-{
-	int mid = left + (right - left) / 2;
-	if (a[mid] > a[left])
-	{
-		if (a[mid] < a[right])
-			return mid;
-		else if (a[left]>a[right])
-			return left;
-		else
-			return right;
-	}
-	else
-	{
-		if (a[mid] > a[right])
-			return mid;
-		else if (a[left] > a[right])
-			return right;
-		else
-			return left;
-	}
-}
 //1.hoare
 int PartSort1(int* a, int left, int right)
 {
@@ -404,8 +421,59 @@ void QuickSort(int* a, int begin, int end)
 	//int keyi = PartSort1(a, begin, end);
 	//int keyi = PartSort2(a, begin, end);
 	int keyi = PartSort3(a, begin, end);
+
 	QuickSort(a, begin, keyi - 1);
 	QuickSort(a, keyi + 1, end);
+}
+
+//主体
+void QuickSort0(int* a, int begin, int end)
+{
+	if (begin >= end)
+		return;
+
+	if (end - begin + 1 > 20)//可调
+	{
+		//int keyi = PartSort1(a, begin, end);
+		//int keyi = PartSort2(a, begin, end);
+		int keyi = PartSort3(a, begin, end);
+		QuickSort(a, begin, keyi - 1);
+		QuickSort(a, keyi + 1, end);
+	}
+	else
+	{
+		//HeapSort(a, end - begin + 1);
+		ShellSort(a, end - begin + 1);
+	}
+}
+
+#include "stack.h"
+//快速排序（非递归实现）
+void QuickSortNonR(int* a, int begin, int end)
+{
+	Stack st;
+	StackInit(&st);
+	StackPush(&st, begin);
+	StackPush(&st, end);
+	while (!StackEmpty(&st))
+	{
+		int right = StackTop(&st);
+		StackPop(&st);
+		int left = StackTop(&st);
+		StackPop(&st);
+		int keyi = PartSort1(a, left, right);
+		if (left < keyi - 1)
+		{
+			StackPush(&st, left);
+			StackPush(&st, keyi - 1);
+		}
+		if (keyi + 1 < right)
+		{
+			StackPush(&st, keyi + 1);
+			StackPush(&st, right);
+		}
+	}
+	StackDestroy(&st);
 }
 
 //归并排序
@@ -420,18 +488,22 @@ void _MergeSort(int* a, int left, int right, int* tmp)
 	_MergeSort(a, mid + 1, right, tmp);
 	int begin1 = left, end1 = mid;
 	int begin2 = mid + 1, end2 = right;
+	//将两段子区间进行归并，归并结果放在tmp中
 	int i = left;
 	while (begin1 <= end1&&begin2 <= end2)
 	{
+		//将较小的数据优先放入tmp
 		if (a[begin1] < a[begin2])
 			tmp[i++] = a[begin1++];
 		else
 			tmp[i++] = a[begin2++];
 	}
+	//当遍历完其中一个区间，将另一个区间剩余的数据直接放到tmp的后面
 	while (begin1 <= end1)
 		tmp[i++] = a[begin1++];
 	while (begin2 <= end2)
 		tmp[i++] = a[begin2++];
+	//归并完后，拷贝回原数组
 	int j = 0;
 	for (j = left; j <= right; j++)
 		a[j] = tmp[j];
@@ -446,4 +518,87 @@ void MergeSort(int* a, int n)
 	}
 	_MergeSort(a, 0, n - 1, tmp);
 	free(tmp);
+}
+//归并排序（非递归实现）
+void _MergeSortNonR(int* a, int* tmp, int begin1, int end1, int begin2, int end2)
+{
+	int j = begin1;
+	//将两段子区间进行归并，归并结果放在tmp中
+	int i = begin1;
+	while (begin1 <= end1&&begin2 <= end2)
+	{
+		//将较小的数据优先放入tmp
+		if (a[begin1] < a[begin2])
+			tmp[i++] = a[begin1++];
+		else
+			tmp[i++] = a[begin2++];
+	}
+	//当遍历完其中一个区间，将另一个区间剩余的数据直接放到tmp的后面
+	while (begin1 <= end1)
+		tmp[i++] = a[begin1++];
+	while (begin2 <= end2)
+		tmp[i++] = a[begin2++];
+	//归并完后，拷贝回原数组
+	for (; j <= end2; j++)
+		a[j] = tmp[j];
+}
+void MergeSortNonR(int* a, int n)
+{
+	int* tmp = (int*)malloc(sizeof(int)*n);
+	if (tmp == NULL)
+	{
+		printf("malloc fail\n");
+		exit(-1);
+	}
+	int gap = 1;
+	while (gap < n)
+	{
+		int i = 0;
+		for (i = 0; i < n; i += 2 * gap)
+		{
+			int begin1 = i, end1 = i + gap - 1;
+			int begin2 = i + gap, end2 = i + 2 * gap - 1;
+			if (begin2 >= n)
+				break;
+			if (end2 >= n)
+				end2 = n - 1;
+			_MergeSortNonR(a, tmp, begin1, end1, begin2, end2);
+		}
+		gap = 2 * gap;
+	}
+	free(tmp);
+}
+
+//计数排序
+void CountSort(int* a, int n)
+{
+	int min = a[0];
+	int max = a[0];
+	for (int i = 0; i < n; i++)
+	{
+		if (a[i] < min)
+			min = a[i];
+		if (a[i] > max)
+			max = a[i];
+	}
+	int range = max - min + 1;
+	int* count = (int*)calloc(range, sizeof(int));
+	if (count == NULL)
+	{
+		printf("malloc fail\n");
+		exit(-1);
+	}
+	for (int i = 0; i < n; i++)
+	{
+		count[a[i] - min]++;
+	}
+	int i = 0;
+	for (int j = 0; j < range; j++)
+	{
+		while (count[j]--)
+		{
+			a[i++] = j + min;
+		}
+	}
+	free(count);
 }

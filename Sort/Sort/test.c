@@ -102,6 +102,17 @@ void TestQuickSort()
 	PrintArr(a, sz);
 	printf("\n");
 }
+void TestQuickSortNonR()
+{
+	//int a[] = { 23, 43, 56, 98, 12, 34, 54, 87, 23, 83 };
+	int a[] = { 6, 1, 2, 5, 9, 3, 4, 7, 10, 8 };
+	//int a[] = { 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0, -1, -2, -3, -4, -5, -6, -7, -8, -9, -10 };
+	int sz = sizeof(a) / sizeof(a[0]);
+	QuickSortNonR(a, 0, sz - 1);
+	printf("QuickSortNonR:");
+	PrintArr(a, sz);
+	printf("\n");
+}
 void TestMergeSort()
 {
 	//int a[] = { 23, 43, 56, 98, 12, 34, 54, 87, 23, 83 };
@@ -113,19 +124,44 @@ void TestMergeSort()
 	PrintArr(a, sz);
 	printf("\n");
 }
+void TestMergeSortNonR()
+{
+	//int a[] = { 23, 43, 56, 98, 12, 34, 54, 87, 23, 83 };
+	int a[] = { 6, 1, 2, 5, 9, 3, 4, 7, 10, 8 };
+	//int a[] = { 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0, -1, -2, -3, -4, -5, -6, -7, -8, -9, -10 };
+	int sz = sizeof(a) / sizeof(a[0]);
+	MergeSortNonR(a, sz);
+	printf("MergeSortNonR:");
+	PrintArr(a, sz);
+	printf("\n");
+}
+void TestCountSort()
+{
+	//int a[] = { 23, 43, 56, 98, 12, 34, 54, 87, 23, 83 };
+	int a[] = { 6, 1, 2, 5, 9, 3, 4, 7, 10, 8 };
+	//int a[] = { 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0, -1, -2, -3, -4, -5, -6, -7, -8, -9, -10 };
+	int sz = sizeof(a) / sizeof(a[0]);
+	CountSort(a, sz);
+	printf("CountSort:");
+	PrintArr(a, sz);
+	printf("\n");
+}
 int main()
 {
-	TestInertSort();
-	TestShellSort();
+	//TestInertSort();
+	//TestShellSort();
 	TestSelectSort1();
-	TestSelectSort2();
-	TestHeapSort();
-	TestBubbleSort();
-	TestQuickSort1();
-	TestQuickSort2();
-	TestQuickSort3();
-	TestQuickSort();
-	printf("三数取中未测试！\n");
-	TestMergeSort();
+	//TestSelectSort2();
+	//TestHeapSort();
+	//TestBubbleSort();
+	//TestQuickSort1();
+	//TestQuickSort2();
+	//TestQuickSort3();
+	//TestQuickSort();
+	//TestQuickSortNonR();
+	//printf("三数取中未测试！\n");
+	//TestMergeSort();
+	//TestMergeSortNonR();
+	//TestCountSort();
 	return 0;
 }
