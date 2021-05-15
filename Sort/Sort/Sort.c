@@ -154,12 +154,16 @@ void AdjustDown(int* a, int n, int root)
 //堆排序
 void HeapSort(int* a, int n)
 {
+	printf("        ");
+	PrintArr(a, n);
 	//排升序，建大堆
 	int i = 0;
 	for (i = (n - 1 - 1) / 2; i >= 0; i--)
 	{
 		AdjustDown(a, n, i);
 	}
+	printf("        ");
+	PrintArr(a, n);
 	int end = n - 1;
 	while (end)
 	{
@@ -234,18 +238,18 @@ int GetMidIndex(int* a, int left, int right)
 			return left;
 	}
 }
-//1.hoare
+//快速排序（Hoare版本）
 void QuickSort1(int* a, int begin, int end)
 {
-	if (begin >= end)
+	if (begin >= end)//当只有一个数据或是序列不存在时，不需要进行操作
 		return;
 	//三数取中
 	int midIndex = GetMidIndex(a, begin, end);
 	Swap(&a[begin], &a[midIndex]);
 
-	int left = begin;
-	int right = end;
-	int keyi = left;
+	int left = begin;//L
+	int right = end;//R
+	int keyi = left;//key的下标
 	while (left < right)
 	{
 		//right先走，找小
@@ -258,30 +262,30 @@ void QuickSort1(int* a, int begin, int end)
 		{
 			left++;
 		}
-		if (left < right)
+		if (left < right)//交换left和right的值
 		{
 			Swap(&a[left], &a[right]);
 		}
 	}
-	int meeti = left;
-	Swap(&a[keyi], &a[meeti]);
+	int meeti = left;//L和R的相遇点
+	Swap(&a[keyi], &a[meeti]);//交换key和相遇点的值
 
-	QuickSort1(a, begin, meeti - 1);
-	QuickSort1(a, meeti + 1, end);
+	QuickSort1(a, begin, meeti - 1);//key的左序列进行此操作
+	QuickSort1(a, meeti + 1, end);//key的右序列进行此操作
 }
-//2.挖坑法
+//快速排序（挖坑法）
 void QuickSort2(int* a, int begin, int end)
 {
-	if (begin >= end)
+	if (begin >= end)//当只有一个数据或是序列不存在时，不需要进行操作
 		return;
 
 	//三数取中
 	int midIndex = GetMidIndex(a, begin, end);
 	Swap(&a[begin], &a[midIndex]);
 
-	int left = begin;
-	int right = end;
-	int key = a[left];
+	int left = begin;//L
+	int right = end;//R
+	int key = a[left];//在最左边形成一个坑位
 	while (left < right)
 	{
 		//right向左，找小
@@ -299,16 +303,16 @@ void QuickSort2(int* a, int begin, int end)
 		//填坑
 		a[right] = a[left];
 	}
-	int meeti = left;
-	a[meeti] = key;
+	int meeti = left;//L和R的相遇点
+	a[meeti] = key;//将key抛入坑位
 
-	QuickSort2(a, begin, meeti - 1);
-	QuickSort2(a, meeti + 1, end);
+	QuickSort2(a, begin, meeti - 1);//key的左序列进行此操作
+	QuickSort2(a, meeti + 1, end);//key的右序列进行此操作
 }
-//3.前后指针法
+//快速排序（前后指针法）
 void QuickSort3(int* a, int begin, int end)
 {
-	if (begin >= end)
+	if (begin >= end)//当只有一个数据或是序列不存在时，不需要进行操作
 		return;
 
 	//三数取中
@@ -318,31 +322,31 @@ void QuickSort3(int* a, int begin, int end)
 	int prev = begin;
 	int cur = begin + 1;
 	int keyi = begin;
-	while (cur <= end)
+	while (cur <= end)//当cur未越界时继续
 	{
-		if (a[cur] < a[keyi] && ++prev != cur)
+		if (a[cur] < a[keyi] && ++prev != cur)//cur指向的内容小于key
 		{
 			Swap(&a[prev], &a[cur]);
 		}
 		cur++;
 	}
-	int meeti = prev;
-	Swap(&a[keyi], &a[meeti]);
+	int meeti = prev;//cur越界时，prev的位置
+	Swap(&a[keyi], &a[meeti]);//交换key和prev指针指向的内容
 
-	QuickSort3(a, begin, meeti - 1);
-	QuickSort3(a, meeti + 1, end);
+	QuickSort3(a, begin, meeti - 1);//key的左序列进行此操作
+	QuickSort3(a, meeti + 1, end);//key的右序列进行此操作
 }
 
 
 
 //快速排序（递归实现）
-//1.hoare
+//Hoare版本（单趟排序）
 int PartSort1(int* a, int left, int right)
 {
 	int midIndex = GetMidIndex(a, left, right);
 	Swap(&a[left], &a[midIndex]);
 
-	int keyi = left;
+	int keyi = left;//key的下标
 	while (left < right)
 	{
 		//right走，找小
@@ -357,20 +361,20 @@ int PartSort1(int* a, int left, int right)
 		}
 		if (left < right)
 		{
-			Swap(&a[left], &a[right]);
+			Swap(&a[left], &a[right]);//交换left和right的值
 		}
 	}
-	int meeti = left;
-	Swap(&a[keyi], &a[meeti]);
-	return meeti;
+	int meeti = left;//L和R的相遇点
+	Swap(&a[keyi], &a[meeti]);//交换key和相遇点的值
+	return meeti;//返回相遇点，即key的当前位置
 }
-//2.挖坑法
+//挖坑法（单趟排序）
 int PartSort2(int* a, int left, int right)
 {
 	int midIndex = GetMidIndex(a, left, right);
 	Swap(&a[left], &a[midIndex]);
 
-	int key = a[left];
+	int key = a[left];//在最左边形成一个坑位
 	while (left < right)
 	{
 		//right向左，找小
@@ -388,11 +392,11 @@ int PartSort2(int* a, int left, int right)
 		//填坑
 		a[right] = a[left];
 	}
-	int meeti = left;
-	a[meeti] = key;
-	return meeti;
+	int meeti = left;//L和R的相遇点
+	a[meeti] = key;//将key抛入坑位
+	return meeti;//返回key的当前位置
 }
-//3.前后指针法
+//前后指针法（单趟排序）
 int PartSort3(int* a, int left, int right)
 {
 	int midIndex = GetMidIndex(a, left, right);
@@ -401,17 +405,17 @@ int PartSort3(int* a, int left, int right)
 	int prev = left;
 	int cur = left + 1;
 	int keyi = left;
-	while (cur <= right)
+	while (cur <= right)//当cur未越界时继续
 	{
-		if (a[cur] < a[keyi] && ++prev != cur)
+		if (a[cur] < a[keyi] && ++prev != cur)//cur指向的内容小于key
 		{
 			Swap(&a[prev], &a[cur]);
 		}
 		cur++;
 	}
-	int meeti = prev;
-	Swap(&a[keyi], &a[meeti]);
-	return meeti;
+	int meeti = prev;//cur越界时，prev的位置
+	Swap(&a[keyi], &a[meeti]);//交换key和prev指针指向的内容
+	return meeti;//返回key的当前位置
 }
 //主体
 void QuickSort(int* a, int begin, int end)
@@ -426,24 +430,25 @@ void QuickSort(int* a, int begin, int end)
 	QuickSort(a, keyi + 1, end);
 }
 
-//主体
+//优化后的快速排序
 void QuickSort0(int* a, int begin, int end)
 {
-	if (begin >= end)
+	if (begin >= end)//当只有一个数据或是序列不存在时，不需要进行操作
 		return;
 
-	if (end - begin + 1 > 20)//可调
+	if (end - begin + 1 > 20)//可自行调整
 	{
+		//可调用快速排序的单趟排序三种中的任意一种
 		//int keyi = PartSort1(a, begin, end);
 		//int keyi = PartSort2(a, begin, end);
 		int keyi = PartSort3(a, begin, end);
-		QuickSort(a, begin, keyi - 1);
-		QuickSort(a, keyi + 1, end);
+		QuickSort(a, begin, keyi - 1);//key的左序列进行此操作
+		QuickSort(a, keyi + 1, end);//key的右序列进行此操作
 	}
 	else
 	{
 		//HeapSort(a, end - begin + 1);
-		ShellSort(a, end - begin + 1);
+		ShellSort(a, end - begin + 1);//当序列长度小于等于20时，使用希尔排序
 	}
 }
 
@@ -451,41 +456,42 @@ void QuickSort0(int* a, int begin, int end)
 //快速排序（非递归实现）
 void QuickSortNonR(int* a, int begin, int end)
 {
-	Stack st;
-	StackInit(&st);
-	StackPush(&st, begin);
-	StackPush(&st, end);
+	Stack st;//创建栈
+	StackInit(&st);//初始化栈
+	StackPush(&st, begin);//待排序列的L
+	StackPush(&st, end);//待排序列的R
 	while (!StackEmpty(&st))
 	{
-		int right = StackTop(&st);
-		StackPop(&st);
-		int left = StackTop(&st);
-		StackPop(&st);
+		int right = StackTop(&st);//读取R
+		StackPop(&st);//出栈
+		int left = StackTop(&st);//读取L
+		StackPop(&st);//出栈
+		//该处调用的是Hoare版本的单趟排序
 		int keyi = PartSort1(a, left, right);
-		if (left < keyi - 1)
+		if (left < keyi - 1)//该序列的左序列还需要排序
 		{
-			StackPush(&st, left);
-			StackPush(&st, keyi - 1);
+			StackPush(&st, left);//左序列的L入栈
+			StackPush(&st, keyi - 1);//左序列的R入栈
 		}
-		if (keyi + 1 < right)
+		if (keyi + 1 < right)// 该序列的右序列还需要排序
 		{
-			StackPush(&st, keyi + 1);
-			StackPush(&st, right);
+			StackPush(&st, keyi + 1);//右序列的L入栈
+			StackPush(&st, right);//右序列的R入栈
 		}
 	}
-	StackDestroy(&st);
+	StackDestroy(&st);//销毁栈
 }
 
-//归并排序
+//归并排序（子函数）
 void _MergeSort(int* a, int left, int right, int* tmp)
 {
-	if (left >= right)//归并结束条件
+	if (left >= right)//归并结束条件：当只有一个数据或是序列不存在时，不需要再分解
 	{
 		return;
 	}
-	int mid = left + (right - left) / 2;
-	_MergeSort(a, left, mid, tmp);
-	_MergeSort(a, mid + 1, right, tmp);
+	int mid = left + (right - left) / 2;//中间下标
+	_MergeSort(a, left, mid, tmp);//对左序列进行归并
+	_MergeSort(a, mid + 1, right, tmp);//对右序列进行归并
 	int begin1 = left, end1 = mid;
 	int begin2 = mid + 1, end2 = right;
 	//将两段子区间进行归并，归并结果放在tmp中
@@ -508,18 +514,21 @@ void _MergeSort(int* a, int left, int right, int* tmp)
 	for (j = left; j <= right; j++)
 		a[j] = tmp[j];
 }
+//归并排序（主体函数）
 void MergeSort(int* a, int n)
 {
-	int* tmp = (int*)malloc(sizeof(int)*n);
+	int* tmp = (int*)malloc(sizeof(int)*n);//申请一个与原数组大小相同的空间
 	if (tmp == NULL)
 	{
 		printf("malloc fail\n");
 		exit(-1);
 	}
-	_MergeSort(a, 0, n - 1, tmp);
-	free(tmp);
+	_MergeSort(a, 0, n - 1, tmp);//归并排序
+	free(tmp);//释放空间
 }
-//归并排序（非递归实现）
+
+
+//归并排序（子函数）
 void _MergeSortNonR(int* a, int* tmp, int begin1, int end1, int begin2, int end2)
 {
 	int j = begin1;
@@ -542,15 +551,16 @@ void _MergeSortNonR(int* a, int* tmp, int begin1, int end1, int begin2, int end2
 	for (; j <= end2; j++)
 		a[j] = tmp[j];
 }
+//归并排序（主体函数）
 void MergeSortNonR(int* a, int n)
 {
-	int* tmp = (int*)malloc(sizeof(int)*n);
+	int* tmp = (int*)malloc(sizeof(int)*n);//申请一个与待排序列大小相同的空间，用于辅助合并序列
 	if (tmp == NULL)
 	{
 		printf("malloc fail\n");
 		exit(-1);
 	}
-	int gap = 1;
+	int gap = 1;//需合并的子序列中元素的个数
 	while (gap < n)
 	{
 		int i = 0;
@@ -558,22 +568,22 @@ void MergeSortNonR(int* a, int n)
 		{
 			int begin1 = i, end1 = i + gap - 1;
 			int begin2 = i + gap, end2 = i + 2 * gap - 1;
-			if (begin2 >= n)
+			if (begin2 >= n)//最后一组的第二个小区间不存在或是第一个小区间不够gap个，此时不需要对该小组进行合并
 				break;
-			if (end2 >= n)
+			if (end2 >= n)//最后一组的第二个小区间不够gap个，则第二个小区间的后界变为数组的后界
 				end2 = n - 1;
-			_MergeSortNonR(a, tmp, begin1, end1, begin2, end2);
+			_MergeSortNonR(a, tmp, begin1, end1, begin2, end2);//合并两个有序序列
 		}
-		gap = 2 * gap;
+		gap = 2 * gap;//下一趟需合并的子序列中元素的个数翻倍
 	}
-	free(tmp);
+	free(tmp);//释放空间
 }
 
 //计数排序
 void CountSort(int* a, int n)
 {
-	int min = a[0];
-	int max = a[0];
+	int min = a[0];//记录数组中的最小值
+	int max = a[0];//记录数组中的最大值
 	for (int i = 0; i < n; i++)
 	{
 		if (a[i] < min)
@@ -581,18 +591,20 @@ void CountSort(int* a, int n)
 		if (a[i] > max)
 			max = a[i];
 	}
-	int range = max - min + 1;
-	int* count = (int*)calloc(range, sizeof(int));
+	int range = max - min + 1;//min和max之间的自然数个数（包括min和max本身）
+	int* count = (int*)calloc(range, sizeof(int));//开辟可储存range个整型的内存空间，并将内存空间置0
 	if (count == NULL)
 	{
 		printf("malloc fail\n");
 		exit(-1);
 	}
+	//统计相同元素出现次数（相对映射）
 	for (int i = 0; i < n; i++)
 	{
 		count[a[i] - min]++;
 	}
 	int i = 0;
+	//根据统计结果将序列回收到原来的序列中
 	for (int j = 0; j < range; j++)
 	{
 		while (count[j]--)
@@ -600,5 +612,5 @@ void CountSort(int* a, int n)
 			a[i++] = j + min;
 		}
 	}
-	free(count);
+	free(count);//释放空间
 }
