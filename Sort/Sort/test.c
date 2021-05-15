@@ -150,11 +150,11 @@ int main()
 {
 	//TestInertSort();
 	//TestShellSort();
-	TestSelectSort1();
+	//TestSelectSort1();
 	//TestSelectSort2();
 	//TestHeapSort();
 	//TestBubbleSort();
-	//TestQuickSort1();
+	TestQuickSort1();
 	//TestQuickSort2();
 	//TestQuickSort3();
 	//TestQuickSort();
