@@ -154,16 +154,12 @@ void AdjustDown(int* a, int n, int root)
 //∂—≈≈–Ú
 void HeapSort(int* a, int n)
 {
-	printf("        ");
-	PrintArr(a, n);
 	//≈≈…˝–Ú£¨Ω®¥Û∂—
 	int i = 0;
 	for (i = (n - 1 - 1) / 2; i >= 0; i--)
 	{
 		AdjustDown(a, n, i);
 	}
-	printf("        ");
-	PrintArr(a, n);
 	int end = n - 1;
 	while (end)
 	{
@@ -194,6 +190,7 @@ void HeapSort(int* a, int n)
 //	}
 //}
 
+//√∞≈›≈≈–Ú
 void BubbleSort(int* a, int n)
 {
 	int end = 0;
