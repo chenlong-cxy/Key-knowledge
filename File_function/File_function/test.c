@@ -197,32 +197,32 @@
 //int fprintf( FILE *stream, const char *format [, argument ]...);
 
 //int printf( const char *format [, argument]... );
-//#include <stdio.h>
-//#include <string.h>
-//#include <errno.h>
-//struct S
-//{
-//	char name[20];
-//	char sex[5];
-//	int age;
-//};
-//int main()
-//{
-//	//打开文件
-//	FILE* pf = fopen("data.txt", "w");
-//	if (pf == NULL)
-//	{
-//		printf("%s\n", strerror(errno));
-//		return 1;//文件打开失败，失败返回
-//	}
-//	//对文件进行格式化输出操作
-//	struct S s = { "zhangsan", "nan", 20 };
-//	fprintf(pf, "%s %s %d\n", s.name, s.sex, s.age);
-//	//关闭文件
-//	fclose(pf);
-//	pf = NULL;
-//	return 0;
-//}
+#include <stdio.h>
+#include <string.h>
+#include <errno.h>
+struct S
+{
+	char name[20];
+	char sex[5];
+	int age;
+};
+int main()
+{
+	//打开文件
+	FILE* pf = fopen("data.txt", "w");
+	if (pf == NULL)
+	{
+		printf("%s\n", strerror(errno));
+		return 1;//文件打开失败，失败返回
+	}
+	//对文件进行格式化输出操作
+	struct S s = { "zhangsan", "nan", 20 };
+	fprintf(pf, "%s %s %d\n", s.name, s.sex, s.age);
+	//关闭文件
+	fclose(pf);
+	pf = NULL;
+	return 0;
+}
 
 
 //6.fscanf函数
