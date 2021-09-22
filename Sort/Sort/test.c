@@ -149,7 +149,7 @@ void TestCountSort()
 }
 int main()
 {
-	//TestInertSort();
+	TestInertSort();
 	//TestShellSort();
 	//TestSelectSort1();
 	//TestSelectSort2();
