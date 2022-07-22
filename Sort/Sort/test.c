@@ -147,6 +147,7 @@ void TestCountSort()
 	PrintArr(a, sz);
 	printf("\n");
 }
+
 int main()
 {
 	TestInertSort();
