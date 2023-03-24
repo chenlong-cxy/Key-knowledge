@@ -223,3 +223,15 @@
 //	test(arr);//可以传入一级指针数组的数组名
 //	return 0;
 //}
+
+
+#include <stdio.h>
+
+int main() {
+	int arr[5] = { 1, 2, 3, 4, 5 };
+	printf("%d\n", *(arr + 1));
+	printf("%d\n", *(&arr + 1));
+	printf("%x\n", arr);
+	printf("%x\n", &arr);
+	return 0;
+}
