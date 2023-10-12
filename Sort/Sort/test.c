@@ -148,15 +148,25 @@ void TestCountSort()
 	printf("\n");
 }
 
+void TestQuickSort0()
+{
+	int a[] = { 9, 84, 24, 1, 5, 34, 76, 23, 76, 4, 98, 234, 12 , 343, 6465, 12312, 456, 345, 234, 2,132, 35, 78, 12, 43, 12, 4, 23, 23211, 100 };
+	int sz = sizeof(a) / sizeof(a[0]);
+	QuickSort0(a, 0, sz - 1);
+	printf("QuickSort0:");
+	PrintArr(a, sz);
+	printf("\n");
+}
+
 int main()
 {
-	TestInertSort();
+	//TestInertSort();
 	//TestShellSort();
 	//TestSelectSort1();
 	//TestSelectSort2();
 	//TestHeapSort();
 	//TestBubbleSort();
-	TestQuickSort1();
+	//TestQuickSort1();
 	//TestQuickSort2();
 	//TestQuickSort3();
 	//TestQuickSort();
@@ -165,5 +175,7 @@ int main()
 	//TestMergeSort();
 	//TestMergeSortNonR();
 	//TestCountSort();
+
+	TestQuickSort0();
 	return 0;
 }

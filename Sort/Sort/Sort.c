@@ -439,13 +439,13 @@ void QuickSort0(int* a, int begin, int end)
 		//int keyi = PartSort1(a, begin, end);
 		//int keyi = PartSort2(a, begin, end);
 		int keyi = PartSort3(a, begin, end);
-		QuickSort(a, begin, keyi - 1);//key的左序列进行此操作
-		QuickSort(a, keyi + 1, end);//key的右序列进行此操作
+		QuickSort0(a, begin, keyi - 1);//key的左序列进行此操作
+		QuickSort0(a, keyi + 1, end);//key的右序列进行此操作
 	}
 	else
 	{
-		//HeapSort(a, end - begin + 1);
-		ShellSort(a, end - begin + 1);//当序列长度小于等于20时，使用希尔排序
+		//HeapSort(a + begin, end - begin + 1);
+		ShellSort(a+begin, end - begin + 1);//当序列长度小于等于20时，使用希尔排序
 	}
 }
 
